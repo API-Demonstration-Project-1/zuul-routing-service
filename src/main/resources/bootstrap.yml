@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: zuul-routing-service
+  profiles:
+    active:
+      default
+  cloud:
+    config:
+      enabled: true
