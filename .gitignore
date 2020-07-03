@@ -1,2 +1,4 @@
 
 *.prefs
+*.class
+target/**
