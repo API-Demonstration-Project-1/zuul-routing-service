@@ -1,7 +1,12 @@
 server:
   port: 5555
 
-  #Setting logging levels
+  ssl:
+    key-store: certs/proarchskeystore.p12
+    key-store-password: proarchs
+    keyStoreType: PKCS12
+    keyAlias: proarchs
+  
 logging:
     level:
       com.netflix: WARN
@@ -25,6 +30,7 @@ zuul:
     user-management-service: /users/**
     generic-api-client: /client/**
     config-repo-service: /config/**
+    tenant-management-service: /tms/**
   sensitiveHeaders: Cookie,Set-Cookie
   
 #signing:

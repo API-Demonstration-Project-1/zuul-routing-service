@@ -1,9 +1,14 @@
 package com.toystore.ecomm.zuulsvr.filters;
 
 
-import com.netflix.zuul.ZuulFilter;
-import com.netflix.zuul.context.RequestContext;
-import com.toystore.ecomm.zuulsvr.model.AbTestingRoute;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
@@ -30,16 +35,9 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
+import com.toystore.ecomm.zuulsvr.model.AbTestingRoute;
 
 @Component
 public class SpecialRoutesFilter extends ZuulFilter {
@@ -54,7 +52,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
 
     @Override
     public String filterType() {
-        return filterUtils.ROUTE_FILTER_TYPE;
+        return FilterUtils.ROUTE_FILTER_TYPE;
     }
 
     @Override
@@ -152,8 +150,11 @@ public class SpecialRoutesFilter extends ZuulFilter {
                                  HttpServletRequest request, MultiValueMap<String, String> headers,
                                  MultiValueMap<String, String> params, InputStream requestEntity)
             throws Exception {
-        Map<String, Object> info = this.helper.debug(verb, uri, headers, params,
-                requestEntity);
+		
+		//Map<String, Object> info = this.helper.debug(verb, uri, headers, params, requestEntity);
+		 
+    	this.helper.debug(verb, uri, headers, params, requestEntity);
+    	
         URL host = new URL( uri );
         HttpHost httpHost = getHttpHost(host);
 
