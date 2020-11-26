@@ -33,5 +33,18 @@ zuul:
     tenant-management-service: /tms/**
   sensitiveHeaders: Cookie,Set-Cookie
   
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+
 #signing:
   #key: alteredcarbons1e7
